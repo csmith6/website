@@ -16,9 +16,9 @@ For a paragraph, just type normally.
 
 column 1 | column 2
 ---|---
-Phillies | National 
-Yankees | American
-Cubs | National 
-Red Sox | American
+Eagles| NFC 
+Steelers | AFC
+Dolphins | AFC 
+Panthers | NFC
 
 <img src="pittsburgh-pirates-p.jpg" width="300"/>
