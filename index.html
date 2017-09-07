@@ -156,6 +156,205 @@ sqldf(query)</code></pre>
 ## 24 thomamy01   1927    NYA  0
 ## 25  weraju01   1927    NYA  1</code></pre>
 </div>
+<div id="further-sql-knowledge" class="section level2">
+<h2>Further SQL Knowledge</h2>
+<p>Today we learned more extensive SQL commands along with ordering our querys by certain catagories.</p>
+<p>Here is an example a selective SQL query using homeruns (HR) and the teamID of the New York Yankees:</p>
+<pre class="r"><code>query &lt;- &quot;SELECT playerID, teamID, yearID, HR FROM Batting
+WHERE teamID='NYA' and HR&gt;=40&quot;
+sqldf(query)</code></pre>
+<pre><code>##     playerID teamID yearID HR
+## 1   ruthba01    NYA   1920 54
+## 2   ruthba01    NYA   1921 59
+## 3   ruthba01    NYA   1923 41
+## 4   ruthba01    NYA   1924 46
+## 5   ruthba01    NYA   1926 47
+## 6  gehrilo01    NYA   1927 47
+## 7   ruthba01    NYA   1927 60
+## 8   ruthba01    NYA   1928 54
+## 9   ruthba01    NYA   1929 46
+## 10 gehrilo01    NYA   1930 41
+## 11  ruthba01    NYA   1930 49
+## 12 gehrilo01    NYA   1931 46
+## 13  ruthba01    NYA   1931 46
+## 14  ruthba01    NYA   1932 41
+## 15 gehrilo01    NYA   1934 49
+## 16 gehrilo01    NYA   1936 49
+## 17 dimagjo01    NYA   1937 46
+## 18 mantlmi01    NYA   1956 52
+## 19 mantlmi01    NYA   1958 42
+## 20 mantlmi01    NYA   1960 40
+## 21 mantlmi01    NYA   1961 54
+## 22 marisro01    NYA   1961 61
+## 23 jacksre01    NYA   1980 41
+## 24 martiti02    NYA   1997 44
+## 25 giambja01    NYA   2002 41
+## 26 giambja01    NYA   2003 41
+## 27 rodrial01    NYA   2005 48
+## 28 rodrial01    NYA   2007 54
+## 29 grandcu01    NYA   2011 41
+## 30 grandcu01    NYA   2012 43</code></pre>
+<p>Also, we learned hot set greater than and less than parameters within a query:</p>
+<pre class="r"><code>query2 &lt;- query &lt;- &quot;SELECT playerID, teamID, yearID, HR, SO FROM Batting
+WHERE SO&lt;60 and HR&gt;40&quot;
+sqldf(query2)</code></pre>
+<pre><code>##     playerID teamID yearID HR SO
+## 1  hornsro01    SLN   1922 42 50
+## 2  willicy01    PHI   1923 41 57
+## 3    ottme01    NY1   1929 42 38
+## 4  gehrilo01    NYA   1931 46 56
+## 5   ruthba01    NYA   1931 46 51
+## 6  gehrilo01    NYA   1934 49 31
+## 7  gehrilo01    NYA   1936 49 46
+## 8  troskha01    CLE   1936 42 58
+## 9  dimagjo01    NYA   1937 46 37
+## 10  mizejo01    SLN   1940 43 49
+## 11  mizejo01    NY1   1947 51 42
+## 12 willite01    BOS   1949 43 48
+## 13 kinerra01    PIT   1951 42 57
+## 14 camparo01    BRO   1953 41 58
+## 15 rosenal01    CLE   1953 43 48
+## 16 kluszte01    CIN   1954 49 35
+## 17  mayswi01    NY1   1954 41 57
+## 18 kluszte01    CIN   1955 47 40
+## 19 aaronha01    ML1   1957 44 58
+## 20 sievero01    WS1   1957 42 55
+## 21 aaronha01    ATL   1969 44 47
+## 22 aaronha01    ATL   1971 47 58
+## 23 thomafr04    CHA   1993 41 54
+## 24 bondsba01    SFN   2002 46 47
+## 25 bondsba01    SFN   2003 45 58
+## 26 bondsba01    SFN   2004 45 41
+## 27 pujolal01    SLN   2004 46 52
+## 28 pujolal01    SLN   2006 49 50</code></pre>
+<p>Here is another example demonstrating greater than or equal to and less than or equal to filters within a query:</p>
+<pre class="r"><code>query3 &lt;- &quot;SELECT playerID, teamID, yearID, HR FROM Batting
+WHERE teamID='PHI' and HR&gt;30 and yearID&gt;=1970 and yearID&lt;=1979&quot;
+sqldf(query3)</code></pre>
+<pre><code>##    playerID teamID yearID HR
+## 1 johnsde01    PHI   1971 34
+## 2 schmimi01    PHI   1974 36
+## 3 luzingr01    PHI   1975 34
+## 4 schmimi01    PHI   1975 38
+## 5 schmimi01    PHI   1976 38
+## 6 luzingr01    PHI   1977 39
+## 7 schmimi01    PHI   1977 38
+## 8 luzingr01    PHI   1978 35
+## 9 schmimi01    PHI   1979 45</code></pre>
+<p>Along with those previous functions, we also learned how to order our results using the ORDER BY query function. Notice that there is a DESC portion of that code that orders our results in a descending fashion:</p>
+<pre class="r"><code>query4 &lt;- &quot;SELECT playerID, yearID, teamID, HR FROM Batting 
+WHERE HR&gt;50
+ORDER BY HR DESC&quot;
+sqldf(query4)</code></pre>
+<pre><code>##     playerID yearID teamID HR
+## 1  bondsba01   2001    SFN 73
+## 2  mcgwima01   1998    SLN 70
+## 3   sosasa01   1998    CHN 66
+## 4  mcgwima01   1999    SLN 65
+## 5   sosasa01   2001    CHN 64
+## 6   sosasa01   1999    CHN 63
+## 7  marisro01   1961    NYA 61
+## 8   ruthba01   1927    NYA 60
+## 9   ruthba01   1921    NYA 59
+## 10  foxxji01   1932    PHA 58
+## 11 greenha01   1938    DET 58
+## 12 howarry01   2006    PHI 58
+## 13 gonzalu01   2001    ARI 57
+## 14 rodrial01   2002    TEX 57
+## 15 wilsoha01   1930    CHN 56
+## 16 griffke02   1997    SEA 56
+## 17 griffke02   1998    SEA 56
+## 18  ruthba01   1920    NYA 54
+## 19  ruthba01   1928    NYA 54
+## 20 kinerra01   1949    PIT 54
+## 21 mantlmi01   1961    NYA 54
+## 22 ortizda01   2006    BOS 54
+## 23 rodrial01   2007    NYA 54
+## 24 bautijo02   2010    TOR 54
+## 25 davisch02   2013    BAL 53
+## 26 mantlmi01   1956    NYA 52
+## 27  mayswi01   1965    SFN 52
+## 28 fostege01   1977    CIN 52
+## 29 mcgwima01   1996    OAK 52
+## 30 rodrial01   2001    TEX 52
+## 31 thomeji01   2002    CLE 52
+## 32 kinerra01   1947    PIT 51
+## 33  mizejo01   1947    NY1 51
+## 34  mayswi01   1955    NY1 51
+## 35 fieldce01   1990    DET 51
+## 36 jonesan01   2005    ATL 51</code></pre>
+<p>We can also use the ASC command after the ORDER BY funtion within the query to order our results in a ascending fashion:</p>
+<pre class="r"><code>query5 &lt;- &quot;SELECT playerId, teamID, yearID, SO FROM Batting
+WHERE SO&lt;10 and AB&gt;=400
+ORDER BY SO ASC&quot;
+sqldf(query5)</code></pre>
+<pre><code>##     playerID teamID yearID SO
+## 1  doyleja01    NY1   1894  3
+## 2  seweljo01    NYA   1932  3
+## 3  seweljo01    CLE   1925  4
+## 4  seweljo01    CLE   1929  4
+## 5  seweljo01    NYA   1933  4
+## 6   wardjo01    NY1   1893  5
+## 7  holloch01    CHN   1922  5
+## 8  mcinnst01    CLE   1922  5
+## 9  wanerll01    PIT   1936  5
+## 10 wrighge01    BS1   1875  6
+## 11 broutda01    BSN   1889  6
+## 12 keelewi01    BLN   1894  6
+## 13  wardjo01    NY1   1894  6
+## 14 quinnjo02    SLN   1895  6
+## 15 mcinnst01    BSN   1924  6
+## 16 seweljo01    CLE   1926  6
+## 17  wardjo01    NY1   1889  7
+## 18 crossla01    PHI   1893  7
+## 19 quinnjo02    SLN   1893  7
+## 20 crossla01    PHI   1894  7
+## 21 vaughfa01    CIN   1896  7
+## 22 cochrmi01    PHA   1927  7
+## 23 seweljo01    CLE   1927  7
+## 24 traynpi01    PIT   1929  7
+## 25 muelldo01    NY1   1956  7
+## 26 connoro01    NY1   1885  8
+## 27 glassja01    IN3   1887  8
+## 28 glassja01    NY1   1890  8
+## 29 donovpa01    PIT   1893  8
+## 30 dungasa01    CHN   1893  8
+## 31 pinknge01    LS3   1893  8
+## 32 brodist01    BLN   1894  8
+## 33 quinnjo02    SLN   1894  8
+## 34 bierblo01    PIT   1895  8
+## 35 crossla01    PHI   1895  8
+## 36   hoydu01    CIN   1895  8
+## 37 roushed01    CIN   1921  8
+## 38 collied01    CHA   1923  8
+## 39 collied01    CHA   1925  8
+## 40 speaktr01    WS1   1927  8
+## 41 cochrmi01    PHA   1929  8
+## 42 seweljo01    NYA   1931  8
+## 43 wanerll01    PIT   1933  8
+## 44 verbaem01    PHI   1947  8
+## 45 ansonca01    CHN   1883  9
+## 46 broutda01    DTN   1887  9
+## 47   hoydu01    WAS   1893  9
+## 48 bierblo01    PIT   1894  9
+## 49 broutda01    BLN   1894  9
+## 50 milledo01    SLN   1894  9
+## 51 keelewi01    BLN   1896  9
+## 52 mckeaed01    CL4   1896  9
+## 53 speaktr01    CLE   1918  9
+## 54  dealch01    CHN   1921  9
+## 55 mcinnst01    BOS   1921  9
+## 56 severha01    SLA   1921  9
+## 57  highan01    BSN   1926  9
+## 58 summaho01    CLE   1926  9
+## 59 seweljo01    CLE   1928  9
+## 60  ricesa01    WS1   1929  9
+## 61 leachfr01    NY1   1931  9
+## 62 busched01    PHA   1945  9
+## 63 holmeto01    BSN   1945  9
+## 64 boudrlo01    CLE   1948  9
+## 65 mitchda01    CLE   1952  9</code></pre>
+</div>
 
 
 

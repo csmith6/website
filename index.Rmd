@@ -22,3 +22,46 @@ query <- "SELECT playerID, yearID, teamID, HR FROM Batting
 WHERE teamID='NYA' and yearID=1927"
 sqldf(query)
 ```
+
+## Further SQL Knowledge
+Today we learned more extensive SQL commands
+along with ordering our querys by certain catagories.
+
+Here is an example a selective SQL query using homeruns (HR) and the teamID of the New York Yankees:
+```{r}
+query <- "SELECT playerID, teamID, yearID, HR FROM Batting
+WHERE teamID='NYA' and HR>=40"
+sqldf(query)
+```
+
+Also, we learned hot set greater than and less than parameters within a query:
+```{r}
+query2 <- query <- "SELECT playerID, teamID, yearID, HR, SO FROM Batting
+WHERE SO<60 and HR>40"
+sqldf(query2)
+```
+
+Here is another example demonstrating greater than or equal to and less than or equal to filters within a query: 
+```{r}
+query3 <- "SELECT playerID, teamID, yearID, HR FROM Batting
+WHERE teamID='PHI' and HR>30 and yearID>=1970 and yearID<=1979"
+sqldf(query3)
+```
+
+Along with those previous functions, we also learned how to order our results using the ORDER BY query function. Notice that there is a DESC portion of that code that orders our results in a descending fashion:
+```{r}
+query4 <- "SELECT playerID, yearID, teamID, HR FROM Batting 
+WHERE HR>50
+ORDER BY HR DESC"
+sqldf(query4)
+```
+
+We can also use the ASC command after the ORDER BY funtion within the query to order our results in a ascending fashion:
+```{r}
+query5 <- "SELECT playerId, teamID, yearID, SO FROM Batting
+WHERE SO<10 and AB>=400
+ORDER BY SO ASC"
+sqldf(query5)
+```
+
+
