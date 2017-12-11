@@ -63,5 +63,79 @@ WHERE SO<10 and AB>=400
 ORDER BY SO ASC"
 sqldf(query5)
 ```
+##Aggregation
+
+Aggregation allows you to group the data. Using GROUP BY will perform the command. There a multiple ways to Group the data:
+
+*sum(colname) gives you the sum
+
+*avg(colname) gives you the average
+
+*max(colname) gives you the maximum
+
+*min(colname) gives you the minimum
+
+#### Examples
+##### #1
+```{r}
+query<-"SELECT playerID, sum(HR) 
+FROM Batting 
+WHERE playerID='ruthba01' 
+GROUP BY playerID" 
+
+sqldf(query) 
+```
+##### #2
+```{r}
+query<-"SELECT playerID, sum(HR)
+FROM Batting 
+GROUP BY playerID 
+HAVING sum(HR)>=600 
+ORDER BY sum(HR) DESC" 
+
+sqldf(query) 
+```
+##### #3
+```{r}
+query<-"SELECT playerID, avg(HR)
+FROM Batting 
+GROUP BY playerID 
+HAVING avg(HR)>30 
+ORDER BY avg(HR) DESC" 
+
+sqldf(query)
+```
+## Joining
+Joining allows data from multiple tables to be used together by using the commands INNER JOIN and ON. 
+
+#### Examples
+##### #1
+```{r}
+query<-"SELECT nameFIRST, nameLAST, teamID, yearID, HR  
+FROM Batting INNER JOIN Master 
+ON Batting.playerID=Master.playerID 
+WHERE Batting.playerID='ruthba01'" 
+
+sqldf(query) 
+```
+##### #2
+```{r}
+query<-"SELECT nameFirst,nameLast,teamID,yearID,HR 
+FROM Batting INNER JOIN Master 
+ON Batting.playerID=Master.playerID 
+WHERE Batting.HR>50
+ORDER BY HR DESC" 
+
+sqldf(query) 
+```
+##### #3
+```{r}
+query<-"SELECT playerID,name,Batting.yearID,Batting.HR 
+FROM Batting INNER JOIN Teams 
+ON Batting.teamID=Teams.teamID and Batting.yearID=Teams.yearID 
+WHERE playerID='ruthba01'" 
+
+sqldf(query) 
+```
 
 
